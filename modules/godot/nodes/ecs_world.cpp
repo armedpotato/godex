@@ -61,7 +61,7 @@ StringName PipelineECS::get_pipeline_name() const {
 	return pipeline_name;
 }
 
-void PipelineECS::set_systems_name(Vector<StringName> p_system_names) {
+void PipelineECS::set_systems_name(const TypedArray<StringName>& p_system_names) {
 	systems_name = p_system_names;
 #ifdef TOOLS_ENABLED
 	editor_reload_execution_graph();
@@ -69,11 +69,11 @@ void PipelineECS::set_systems_name(Vector<StringName> p_system_names) {
 	notify_property_list_changed();
 }
 
-Vector<StringName> PipelineECS::get_systems_name() const {
+TypedArray<StringName> PipelineECS::get_systems_name() const {
 	return systems_name;
 }
 
-void PipelineECS::set_system_bundles(Vector<StringName> p_system_bundles) {
+void PipelineECS::set_system_bundles(const TypedArray<StringName>& p_system_bundles) {
 	system_bundles = p_system_bundles;
 #ifdef TOOLS_ENABLED
 	editor_reload_execution_graph();
@@ -81,7 +81,7 @@ void PipelineECS::set_system_bundles(Vector<StringName> p_system_bundles) {
 	notify_property_list_changed();
 }
 
-Vector<StringName> PipelineECS::get_system_bundles() {
+TypedArray<StringName> PipelineECS::get_system_bundles() {
 	return system_bundles;
 }
 
@@ -395,7 +395,7 @@ void WorldECS::init_default() {
 		return;
 	}
 
-	Vector<StringName> bundles;
+	TypedArray<StringName> bundles;
 	bundles.push_back(StringName("Rendering 3D"));
 	bundles.push_back(StringName("Physics"));
 
@@ -414,8 +414,8 @@ World *WorldECS::get_world() const {
 	return world;
 }
 
-TypedArray<String> WorldECS::get_configuration_warnings() const {
-	TypedArray<String> warnings = Node::get_configuration_warnings();
+PackedStringArray WorldECS::get_configuration_warnings() const {
+	PackedStringArray warnings = Node::get_configuration_warnings();
 
 	if (!is_inside_tree()) {
 		return warnings;

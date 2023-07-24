@@ -112,16 +112,16 @@ public:
 	/// The `ExecutionGraph` is useful to visualize the pipeline composition.
 	/// The `Pipeline` is constructed from the `ExecutionGraph`.
 	static void build_graph(
-			const Vector<StringName> &p_system_bundles,
-			const Vector<StringName> &p_systems,
+			const TypedArray<StringName> &p_system_bundles,
+			const TypedArray<StringName> &p_systems,
 			ExecutionGraph *r_graph,
 			bool p_skip_warnings = false);
 
 	/// This method is used to build the `Pipeline`. This method constructs the
 	/// `ExecutionGraph` then it cooks it and builds the `Pipeline` from it.
 	static void build_pipeline(
-			const Vector<StringName> &p_system_bundles,
-			const Vector<StringName> &p_systems,
+			const TypedArray<StringName> &p_system_bundles,
+			const TypedArray<StringName> &p_systems,
 			Pipeline *r_pipeline);
 
 	/// This is method accepts the `ExecutionGraph` and build the pipeline from it.

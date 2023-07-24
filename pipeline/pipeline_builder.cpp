@@ -198,8 +198,8 @@ void PipelineBuilder::build(Pipeline &r_pipeline) {
 }
 
 void PipelineBuilder::build_graph(
-		const Vector<StringName> &p_system_bundles,
-		const Vector<StringName> &p_systems,
+		const TypedArray<StringName> &p_system_bundles,
+		const TypedArray<StringName> &p_systems,
 		ExecutionGraph *r_graph,
 		bool p_skip_warnings) {
 	CRASH_COND_MSG(r_graph == nullptr, "The pipeline pointer must be valid.");
@@ -259,8 +259,8 @@ void PipelineBuilder::build_graph(
 }
 
 void PipelineBuilder::build_pipeline(
-		const Vector<StringName> &p_system_bundles,
-		const Vector<StringName> &p_systems,
+		const TypedArray<StringName> &p_system_bundles,
+		const TypedArray<StringName> &p_systems,
 		Pipeline *r_pipeline) {
 	CRASH_COND_MSG(r_pipeline == nullptr, "The pipeline pointer must be valid.");
 	ExecutionGraph graph;

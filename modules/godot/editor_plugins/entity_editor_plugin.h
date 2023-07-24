@@ -4,6 +4,8 @@
 #include "core/templates/oa_hash_map.h"
 #include "editor/editor_node.h"
 #include "editor/editor_plugin.h"
+#include "scene/gui/box_container.h"
+#include "editor/editor_inspector.h"
 
 class EntityEditorPlugin;
 class EditorInspectorPluginEntity;

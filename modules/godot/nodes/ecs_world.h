@@ -21,8 +21,8 @@ class PipelineECS : public Resource {
 	/// This name is used to reference this pipeline.
 	StringName pipeline_name;
 
-	Vector<StringName> systems_name;
-	Vector<StringName> system_bundles;
+    TypedArray<StringName> systems_name;
+    TypedArray<StringName> system_bundles;
 
 	// This is just a cache value so to avoid rebuild the pipeline each time
 	// it's activated.
@@ -43,11 +43,11 @@ public:
 	void set_pipeline_name(StringName p_name);
 	StringName get_pipeline_name() const;
 
-	void set_systems_name(Vector<StringName> p_system_names);
-	Vector<StringName> get_systems_name() const;
+	void set_systems_name(const TypedArray<StringName>& p_system_names);
+    TypedArray<StringName> get_systems_name() const;
 
-	void set_system_bundles(Vector<StringName> p_system_bundles);
-	Vector<StringName> get_system_bundles();
+	void set_system_bundles(const TypedArray<StringName>& p_system_bundles);
+    TypedArray<StringName> get_system_bundles();
 
 	/// Insert a new system bundle into the world.
 	void add_system_bundle(const StringName &p_bundle_name);
@@ -122,7 +122,7 @@ public:
 	/// `ECS::get_singleton()->get_commands()`
 	World *get_world() const;
 
-	virtual TypedArray<String> get_configuration_warnings() const override;
+	virtual PackedStringArray get_configuration_warnings() const override;
 
 	void set_pipelines(Vector<Ref<PipelineECS>> p_pipelines);
 	const Vector<Ref<PipelineECS>> &get_pipelines() const;
