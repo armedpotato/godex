@@ -381,18 +381,18 @@ void PipelineBuilder::build_pipeline(
 }
 
 void PipelineBuilder::fetch_bundle_info(
-		const Vector<StringName> &p_system_bundles,
+		const TypedArray<StringName> &p_system_bundles,
 		ExecutionGraph *r_graph) {
-	const StringName *bundle_names = p_system_bundles.ptr();
 	for (int i = 0; i < p_system_bundles.size(); i += 1) {
-		const godex::system_bundle_id bundle_id = ECS::get_system_bundle_id(bundle_names[i]);
-		ERR_CONTINUE_MSG(bundle_id == godex::SYSTEM_BUNDLE_NONE, "The bundle " + bundle_names[i] + " doesn't exist.");
+		const StringName system_bundle_name = p_system_bundles.get(i);
+		const godex::system_bundle_id bundle_id = ECS::get_system_bundle_id(system_bundle_name);
+		ERR_CONTINUE_MSG(bundle_id == godex::SYSTEM_BUNDLE_NONE, "The bundle " + system_bundle_name + " doesn't exist.");
 		const SystemBundleInfo &bundle = ECS::get_system_bundle(bundle_id);
 
 		for (uint32_t s_i = 0; s_i < bundle.systems.size(); s_i += 1) {
 			fetch_system_info(
 					bundle.systems[s_i],
-					bundle_names[i],
+					system_bundle_name,
 					s_i,
 					bundle.dependencies,
 					r_graph);

@@ -308,6 +308,9 @@ struct QueryResultTuple_Impl<I, EntityID, Cs...> : public QueryResultTuple_Impl<
 	EntityID value;
 };
 
+template <std::size_t I, class... C, class... Cs>
+struct QueryResultTuple_Impl<I, Any<C...>, Cs...> : public QueryResultTuple_Impl<I, C..., Cs...> {};
+
 /// Flatten all the Filter, so we can store the data on the same level.
 /// This template is able to flatten the filters: `Changed`, `Not`, `Maybe`, `Any`, `Join`
 ///

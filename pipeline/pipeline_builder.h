@@ -96,8 +96,8 @@ public:
 };
 
 class PipelineBuilder {
-	Vector<StringName> system_bundles;
-	Vector<StringName> systems;
+	TypedArray<StringName> system_bundles;
+	TypedArray<StringName> systems;
 
 public:
 	PipelineBuilder();
@@ -131,7 +131,7 @@ public:
 
 private:
 	static void fetch_bundle_info(
-			const Vector<StringName> &p_system_bundles,
+			const TypedArray<StringName> &p_system_bundles,
 			ExecutionGraph *r_graph);
 
 	static void fetch_system_info(
