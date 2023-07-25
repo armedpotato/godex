@@ -3,9 +3,9 @@
 
 #include "components/dynamic_component.h"
 #include "core/object/message_queue.h"
-#include "modules/godot/databags/scene_tree_databag.h"
-#include "modules/godot/nodes/ecs_utilities.h"
-#include "modules/godot/nodes/ecs_world.h"
+#include "godex/modules/godot/databags/scene_tree_databag.h"
+#include "godex/modules/godot/nodes/ecs_utilities.h"
+#include "godex/modules/godot/nodes/ecs_world.h"
 #include "pipeline/pipeline.h"
 #include "pipeline/pipeline_commands.h"
 #include "scene/main/scene_tree.h"

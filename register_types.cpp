@@ -7,7 +7,7 @@
 #include "ecs.h"
 #include "editor/plugins/node_3d_editor_plugin.h"
 #include "iterators/dynamic_query.h"
-#include "modules/godot/editor_plugins/components_gizmo_3d.h"
+#include "godex/modules/godot/editor_plugins/components_gizmo_3d.h"
 #include "pipeline/pipeline_commands.h"
 #include "systems/dynamic_system.h"
 #include "utils/fetchers.h"
