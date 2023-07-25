@@ -7,7 +7,9 @@
 #include "core/io/resource_loader.h"
 #include "core/object/script_language.h"
 #include "editor/editor_file_system.h"
+#if TOOLS_ENABLED
 #include "editor/editor_node.h"
+#endif
 #include "entity.h"
 #include "shared_component_resource.h"
 
@@ -446,8 +448,9 @@ void ScriptEcs::flush_scripts_preparation() {
 }
 
 void ScriptEcs::save_script(const String &p_setting_list_name, const String &p_script_path) {
+#ifdef TOOLS_ENABLED
 	ERR_FAIL_COND_MSG(EditorNode::get_singleton() == nullptr, "The editor is not defined.");
-
+#endif
 	Array scripts;
 	if (ProjectSettings::get_singleton()->has_setting(p_setting_list_name)) {
 		scripts = ProjectSettings::get_singleton()->get_setting(p_setting_list_name);
@@ -461,8 +464,9 @@ void ScriptEcs::save_script(const String &p_setting_list_name, const String &p_s
 }
 
 void ScriptEcs::remove_script(const String &p_setting_list_name, const String &p_script_path) {
+#ifdef TOOLS_ENABLED
 	ERR_FAIL_COND_MSG(EditorNode::get_singleton() == nullptr, "The editor is not defined.");
-
+#endif
 	if (ProjectSettings::get_singleton()->has_setting(p_setting_list_name) == false) {
 		// Nothing to do.
 		return;

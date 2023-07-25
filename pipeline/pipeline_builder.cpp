@@ -5,6 +5,11 @@
 #include "core/os/os.h"
 #include "pipeline.h"
 
+#ifndef TOOLS_ENABLED
+#define TTR(str) (String(str))
+#endif
+
+
 bool ExecutionGraph::StageNode::is_compatible(const SystemNode *p_system) const {
 	for (uint32_t i = 0; i < systems.size(); i += 1) {
 		const SystemNode *staged_system = systems[i];

@@ -12,7 +12,9 @@
 #include "systems/dynamic_system.h"
 #include "utils/fetchers.h"
 
+#ifdef TOOLS_ENABLED
 Ref<Components3DGizmoPlugin> component_gizmo;
+#endif
 
 void initialize_godex_module(ModuleInitializationLevel p_level) {
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SERVERS) {
@@ -38,7 +40,9 @@ void initialize_godex_module(ModuleInitializationLevel p_level) {
 		ECS::register_databag<PipelineCommands>();
 		ECS::register_databag<FrameTime>();
 	} else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR) {
+#ifdef TOOLS_ENABLED
 		component_gizmo.instantiate();
+#endif
 	}
 }
 
@@ -50,6 +54,8 @@ void uninitialize_godex_module(ModuleInitializationLevel p_level) {
 		ECS::__set_singleton(nullptr);
 		memdelete(ecs);
 
+#ifdef TOOLS_ENABLED
 		component_gizmo = Ref<Components3DGizmoPlugin>();
+#endif
 	}
 }

@@ -7,7 +7,11 @@
 #include "core/config/project_settings.h"
 #include "core/io/resource_loader.h"
 #include "core/object/script_language.h"
+
+#ifdef TOOLS_ENABLED
 #include "editor/editor_node.h"
+#endif
+
 #include "entity.h"
 #include "shared_component_resource.h"
 
@@ -112,6 +116,7 @@ void System::prepare(godex::DynamicSystemExecutionData *p_info) {
 }
 
 String System::validate_script(Ref<Script> p_script) {
+#ifdef TOOLS_ENABLED
 	if (p_script.is_null()) {
 		return TTR("Script is null.");
 	}
@@ -146,6 +151,7 @@ String System::validate_script(Ref<Script> p_script) {
 	if (properties.size()) {
 		return TTR("The System script can't have any property in it. It possible to only access `Component`s and `Databag`s.");
 	}
+#endif
 
 	// This script is safe to use.
 	return "";
@@ -240,6 +246,7 @@ void SystemBundle::execute_after(uint32_t p_system_id) {
 }
 
 String SystemBundle::validate_script(Ref<Script> p_script) {
+#ifdef TOOLS_ENABLED
 	if (p_script.is_null()) {
 		return TTR("Script is null.");
 	}
@@ -261,6 +268,7 @@ String SystemBundle::validate_script(Ref<Script> p_script) {
 	if (has_prepare == false) {
 		return TTR("This script is not overriding the function `_prepare()`.");
 	}
+#endif
 	// This script is safe to use.
 	return "";
 }
@@ -307,6 +315,7 @@ Vector<StringName> Component::get_spawners() {
 }
 
 String Component::validate_script(Ref<Script> p_script) {
+#ifdef TOOLS_ENABLED
 	if (p_script.is_null()) {
 		return TTR("Script is null.");
 	}
@@ -346,6 +355,7 @@ String Component::validate_script(Ref<Script> p_script) {
 				break;
 		}
 	}
+#endif
 
 	// This script is safe to use.
 	return "";

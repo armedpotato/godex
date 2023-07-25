@@ -421,6 +421,7 @@ PackedStringArray WorldECS::get_configuration_warnings() const {
 		return warnings;
 	}
 
+#ifdef TOOLS_ENABLED
 	List<Node *> nodes;
 	get_tree()->get_nodes_in_group("_world_ecs", &nodes);
 
@@ -443,6 +444,7 @@ PackedStringArray WorldECS::get_configuration_warnings() const {
 			}
 		}
 	}
+#endif
 
 	return warnings;
 }

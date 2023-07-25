@@ -120,6 +120,7 @@ void BtBoxGizmo::set_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, Camera3
 }
 
 void BtBoxGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, const Variant &p_restore, bool p_cancel) {
+#ifdef TOOLS_ENABLED
 	Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
 	ERR_FAIL_COND(entity == nullptr);
 	ERR_FAIL_COND(entity->has_component(box_component_name) == false);
@@ -137,6 +138,7 @@ void BtBoxGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, cons
 		ur->add_undo_method(entity, "set_component_value", box_component_name, half_extents_name, restore);
 		ur->commit_action();
 	}
+#endif // TOOLS_ENABLED
 }
 
 void BtSphereGizmo::init() {
@@ -246,6 +248,7 @@ void BtSphereGizmo::set_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, Came
 }
 
 void BtSphereGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, const Variant &p_restore, bool p_cancel) {
+#ifdef TOOLS_ENABLED
 	Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
 	ERR_FAIL_COND(entity == nullptr);
 	ERR_FAIL_COND(entity->has_component(sphere_component_name) == false);
@@ -261,6 +264,7 @@ void BtSphereGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, c
 		ur->add_undo_method(entity, "set_component_value", sphere_component_name, radius_name, p_restore);
 		ur->commit_action();
 	}
+#endif // TOOLS_ENABLED
 }
 
 void BtCapsuleGizmo::init() {
@@ -416,6 +420,7 @@ void BtCapsuleGizmo::set_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, Cam
 }
 
 void BtCapsuleGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, const Variant &p_restore, bool p_cancel) {
+#ifdef TOOLS_ENABLED
 	Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
 	ERR_FAIL_COND(entity == nullptr);
 	ERR_FAIL_COND(entity->has_component(capsule_component_name) == false);
@@ -431,6 +436,7 @@ void BtCapsuleGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, 
 		ur->add_undo_method(entity, "set_component_value", capsule_component_name, p_idx == 0 ? radius_name : height_name, p_restore);
 		ur->commit_action();
 	}
+#endif // TOOLS_ENABLED
 }
 
 void BtConeGizmo::init() {
@@ -562,6 +568,7 @@ void BtConeGizmo::set_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, Camera
 }
 
 void BtConeGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, const Variant &p_restore, bool p_cancel) {
+#ifdef TOOLS_ENABLED
 	Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
 	ERR_FAIL_COND(entity == nullptr);
 	ERR_FAIL_COND(entity->has_component(cone_component_name) == false);
@@ -577,6 +584,7 @@ void BtConeGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, con
 		ur->add_undo_method(entity, "set_component_value", cone_component_name, p_idx == 0 ? radius_name : height_name, p_restore);
 		ur->commit_action();
 	}
+#endif // TOOLS_ENABLED
 }
 
 void BtCylinderGizmo::init() {
@@ -725,6 +733,7 @@ void BtCylinderGizmo::set_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, Ca
 }
 
 void BtCylinderGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, const Variant &p_restore, bool p_cancel) {
+#ifdef TOOLS_ENABLED
 	Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
 	ERR_FAIL_COND(entity == nullptr);
 	ERR_FAIL_COND(entity->has_component(cylinder_component_name) == false);
@@ -740,6 +749,7 @@ void BtCylinderGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx,
 		ur->add_undo_method(entity, "set_component_value", cylinder_component_name, p_idx == 0 ? radius_name : height_name, p_restore);
 		ur->commit_action();
 	}
+#endif // TOOLS_ENABLED
 }
 
 class DebugMeshComponentGizmoData : public ComponentGizmoData {
@@ -754,7 +764,8 @@ void BtConvexGizmo::init() {
 }
 
 void BtConvexGizmo::redraw(EditorNode3DGizmo *p_gizmo) {
-	Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
+#ifdef TOOLS_ENABLED
+    Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
 	ERR_FAIL_COND(entity == nullptr);
 
 	if (entity->has_component(convex_component_name)) {
@@ -780,6 +791,7 @@ void BtConvexGizmo::redraw(EditorNode3DGizmo *p_gizmo) {
 
 		p_gizmo->add_mesh(mesh, material);
 	}
+#endif
 }
 
 int BtConvexGizmo::get_handle_count(const EditorNode3DGizmo *p_gizmo) const {
@@ -806,7 +818,8 @@ void BtTrimeshGizmo::init() {
 }
 
 void BtTrimeshGizmo::redraw(EditorNode3DGizmo *p_gizmo) {
-	Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
+#ifdef TOOLS_ENABLED
+    Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
 	ERR_FAIL_COND(entity == nullptr);
 
 	if (entity->has_component(trimesh_component_name)) {
@@ -832,6 +845,7 @@ void BtTrimeshGizmo::redraw(EditorNode3DGizmo *p_gizmo) {
 
 		p_gizmo->add_mesh(mesh, material);
 	}
+#endif
 }
 
 int BtTrimeshGizmo::get_handle_count(const EditorNode3DGizmo *p_gizmo) const {
@@ -1061,6 +1075,7 @@ void BtPawnGizmo::set_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, Camera
 }
 
 void BtPawnGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, const Variant &p_restore, bool p_cancel) {
+#ifdef TOOLS_ENABLED
 	Entity3D *entity = static_cast<Entity3D *>(p_gizmo->get_node_3d());
 	ERR_FAIL_COND(entity == nullptr);
 	ERR_FAIL_COND(entity->has_component(pawn_component_name) == false);
@@ -1087,4 +1102,5 @@ void BtPawnGizmo::commit_handle(const EditorNode3DGizmo *p_gizmo, int p_idx, con
 		ur->add_undo_method(entity, "set_component_value", pawn_component_name, prop_name, p_restore);
 		ur->commit_action();
 	}
+#endif // TOOLS_ENABLED
 }

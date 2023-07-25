@@ -14,7 +14,11 @@
 #include "editor_plugins/components_mesh_gizmo_3d.h"
 #include "editor_plugins/components_transform_gizmo_3d.h"
 #include "editor_plugins/editor_world_ecs.h"
+
+#ifdef TOOLS_ENABLED
 #include "editor_plugins/entity_editor_plugin.h"
+#endif
+
 #include "nodes/ecs_world.h"
 #include "nodes/entity.h"
 #include "nodes/script_ecs.h"
@@ -26,6 +30,7 @@
 #include "editor/plugins/node_3d_editor_plugin.h"
 
 static void _editor_init() {
+#ifdef TOOLS_ENABLED
 	EditorNode *p_editor = EditorNode::get_singleton();
 	ERR_FAIL_COND_MSG(p_editor == nullptr, "The editor is not defined.");
 
@@ -34,6 +39,7 @@ static void _editor_init() {
 
 	WorldECSEditorPlugin *worldecs_plugin = memnew(WorldECSEditorPlugin(p_editor));
 	EditorNode::get_singleton()->add_editor_plugin(worldecs_plugin);
+#endif
 }
 
 void initialize_godot_module(ModuleInitializationLevel p_level) {
@@ -100,7 +106,7 @@ void initialize_godot_module(ModuleInitializationLevel p_level) {
 
 		// Physics 3D
 		ECS::register_system_bundle("Physics")
-				.set_description(TTR("Physics mechanism."))
+				.set_description("Physics mechanism.")
 				.add(ECS::register_system_dispatcher(physics_pipeline_dispatcher, "Physics")
 								.execute_in(PHASE_PROCESS)
 								.set_description("Physics dispatcher"))
@@ -136,6 +142,7 @@ void initialize_godot_module(ModuleInitializationLevel p_level) {
 
 	} else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR) {
 		if (Engine::get_singleton()->is_editor_hint()) {
+#ifdef TOOLS_ENABLED
 			EditorNode::add_init_callback(_editor_init);
 
 			if (Node3DEditor::get_singleton() != nullptr) {
@@ -146,6 +153,7 @@ void initialize_godot_module(ModuleInitializationLevel p_level) {
 			// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Gizmos
 			Components3DGizmoPlugin::get_singleton()->add_component_gizmo(memnew(TransformComponentGizmo));
 			Components3DGizmoPlugin::get_singleton()->add_component_gizmo(memnew(MeshComponentGizmo));
+#endif
 
 		} else {
 			// Load the Scripted Components/Databags/Systems
