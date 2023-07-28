@@ -267,8 +267,9 @@ StageView *DispatcherPipelineView::add_stage() {
 	return view;
 }
 
-ComponentElement::ComponentElement(EditorNode *p_editor, const String &p_name, Variant p_default) :
-		editor(p_editor) {
+ComponentElement::ComponentElement(EditorNode *p_editor, const String &p_name, Variant p_default) //:
+//		editor(p_editor) {
+	{
 	set_h_size_flags(SizeFlags::SIZE_FILL | SizeFlags::SIZE_EXPAND);
 
 	type = memnew(OptionButton);

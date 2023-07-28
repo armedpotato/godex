@@ -26,7 +26,7 @@ class Hierarchy : public Storage<Child> {
 	LocalVector<HierarchicalStorageBase *> sub_storages;
 
 public:
-	void configure(const Dictionary &p_config) {
+	void configure(const Dictionary &p_config) override {
 		storage.reset();
 		storage.configure(p_config.get("pre_allocate", 500));
 	}
@@ -156,7 +156,7 @@ public:
 		return &storage.get(p_entity);
 	}
 
-	virtual EntitiesBuffer get_stored_entities() const {
+	virtual EntitiesBuffer get_stored_entities() const override {
 		return { storage.get_entities().size(), storage.get_entities().ptr() };
 	}
 
@@ -287,9 +287,11 @@ class HierarchicalStorage : public Storage<T>, public HierarchicalStorageBase {
 	EntityList relationship_dirty_list;
 
 public:
-	void configure(const Dictionary &p_config) {
+	void configure(const Dictionary &p_config) override {
 		internal_storage.reset();
 		internal_storage.configure(p_config.get("pre_allocate", 500));
+
+
 	}
 
 	virtual String get_type_name() const override {
@@ -345,7 +347,7 @@ public:
 		return p_mode == Space::LOCAL || data.is_root ? &data.local : &data.global;
 	}
 
-	virtual EntitiesBuffer get_stored_entities() const {
+	virtual EntitiesBuffer get_stored_entities() const override {
 		return { internal_storage.get_entities().size(), internal_storage.get_entities().ptr() };
 	}
 

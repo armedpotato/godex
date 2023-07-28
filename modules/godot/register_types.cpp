@@ -29,8 +29,8 @@
 
 #include "editor/plugins/node_3d_editor_plugin.h"
 
-static void _editor_init() {
 #ifdef TOOLS_ENABLED
+static void _editor_init() {
 	EditorNode *p_editor = EditorNode::get_singleton();
 	ERR_FAIL_COND_MSG(p_editor == nullptr, "The editor is not defined.");
 
@@ -39,8 +39,8 @@ static void _editor_init() {
 
 	WorldECSEditorPlugin *worldecs_plugin = memnew(WorldECSEditorPlugin(p_editor));
 	EditorNode::get_singleton()->add_editor_plugin(worldecs_plugin);
-#endif
 }
+#endif
 
 void initialize_godot_module(ModuleInitializationLevel p_level) {
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {

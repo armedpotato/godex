@@ -111,7 +111,7 @@ public:
 };
 
 class ComponentElement : public HBoxContainer {
-	EditorNode *editor = nullptr;
+	//EditorNode *editor = nullptr;
 
 	OptionButton *type = nullptr;
 	LineEdit *name = nullptr;

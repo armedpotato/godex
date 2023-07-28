@@ -289,8 +289,13 @@ public:
 	}
 
 public:
+    virtual void insert(EntityID p_entity, godex::SID p_id) override {
+        ERR_PRINT("This component is stored inside a SharedStorage, so you can't just insert the data using the normal `insert` function. Check the documentation.");
+    }
 	// Override Storage<T>
-	virtual void insert(EntityID, const T &) override final {
-		ERR_PRINT("This component is stored inside a SharedStorage, so you can't just insert the data using the normal `insert` function. Check the documentation.");
-	}
+//	virtual void insert(EntityID, const T &) override final {
+//		ERR_PRINT("This component is stored inside a SharedStorage, so you can't just insert the data using the normal `insert` function. Check the documentation.");
+//	}
+private:
+    using Storage<T>::insert;
 };

@@ -54,7 +54,7 @@ public:
 	_FORCE_INLINE_ void push_back(T p_elem) {
 		CRASH_COND_MSG(count >= SIZE, "Out of memory");
 
-		if (!__has_trivial_constructor(T) && !force_trivial) {
+		if (!__is_trivially_constructible(T) && !force_trivial) {
 			memnew_placement(&data[count++], T(p_elem));
 		} else {
 			data[count++] = p_elem;
@@ -67,7 +67,7 @@ public:
 		for (U i = p_index; i < count; i++) {
 			data[i] = data[i + 1];
 		}
-		if (!__has_trivial_destructor(T) && !force_trivial) {
+		if (!__is_trivially_destructible(T) && !force_trivial) {
 			data[count].~T();
 		}
 	}
@@ -80,7 +80,7 @@ public:
 		if (count > p_index) {
 			data[p_index] = data[count];
 		}
-		if (!__has_trivial_destructor(T) && !force_trivial) {
+		if (!__is_trivially_destructible(T) && !force_trivial) {
 			data[count].~T();
 		}
 	}

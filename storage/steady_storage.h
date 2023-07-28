@@ -70,7 +70,7 @@ public:
 		StorageBase::flush_changed();
 	}
 
-	virtual EntitiesBuffer get_stored_entities() const {
+	virtual EntitiesBuffer get_stored_entities() const override {
 		return { storage.get_entities().size(), storage.get_entities().ptr() };
 	}
 };

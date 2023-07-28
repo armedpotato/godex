@@ -154,7 +154,7 @@ public:
 	virtual bool _getv(const StringName &p_name, Variant &r_ret) const override;
 
 	virtual Dictionary get_properties_data() const override;
-	virtual void _get_property_list(List<PropertyInfo> *r_list) const;
+	virtual void _get_property_list(List<PropertyInfo> *r_list) const override;
 };
 
 class ScriptComponentDepot : public ComponentDepot {
@@ -167,7 +167,7 @@ public:
 	virtual bool _getv(const StringName &p_name, Variant &r_ret) const override;
 
 	virtual Dictionary get_properties_data() const override;
-	virtual void _get_property_list(List<PropertyInfo> *r_list) const;
+	virtual void _get_property_list(List<PropertyInfo> *r_list) const override;
 };
 
 class SharedComponentDepot : public ComponentDepot {
@@ -180,5 +180,5 @@ public:
 	virtual bool _getv(const StringName &p_name, Variant &r_ret) const override;
 
 	virtual Dictionary get_properties_data() const override;
-	virtual void _get_property_list(List<PropertyInfo> *r_list) const;
+	virtual void _get_property_list(List<PropertyInfo> *r_list) const override;
 };
